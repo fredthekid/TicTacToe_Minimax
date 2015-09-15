@@ -29,7 +29,7 @@ private:
     void getHumanInput();
 
     //AI Functions
-    GameNode MiniMax(GameNode&, bool, bool);
+    GameNode MiniMax(GameNode&, bool);
     void ComputerMakeMove();
 
     //Game State Functions

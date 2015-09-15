@@ -94,7 +94,7 @@ void TicTacToe::printBoard(char printthis [3][3] ) {
 //humanFirst == false, computer should maximize
 
 
-GameNode TicTacToe::MiniMax(GameNode& Node, bool humanOrComputer, bool firstcall){ //humanOrComputer: true == human move, false = computer move
+GameNode TicTacToe::MiniMax(GameNode& Node, bool humanOrComputer){ //humanOrComputer: true == human move, false = computer move
     if(!AvailableMoves(Node.current_board)){
         if(checkWinner(Node.current_board) == 10){
             Node.SetScore(10);
@@ -125,7 +125,7 @@ GameNode TicTacToe::MiniMax(GameNode& Node, bool humanOrComputer, bool firstcall
                 if(humanOrComputer == true) ComputerMove.UpdateBoard(x,y, humanFirst);
                 //COMPUTER MOVE
                 else ComputerMove.UpdateBoard(x,y, !humanFirst);
-                ComputerMove.SetScore(MiniMax(ComputerMove,!humanOrComputer,false).GetScore());
+                ComputerMove.SetScore(MiniMax(ComputerMove,!humanOrComputer).GetScore());
                 scores.push_back(ComputerMove);
             }
         }
@@ -137,7 +137,6 @@ GameNode TicTacToe::MiniMax(GameNode& Node, bool humanOrComputer, bool firstcall
     GameNode Max;
     Max.SetScore(-1000);
     for(int i = 0; i < scores.size(); i++){
-        //if(firstcall) cout << scores[i].GetScore() << endl;
         if(scores[i].GetScore() > Max.GetScore()) Max = scores[i];
         if(scores[i].GetScore() < Min.GetScore()) Min = scores[i];
     }
@@ -180,7 +179,7 @@ void TicTacToe::getHumanInput(){
 
 void TicTacToe::ComputerMakeMove() {
     GameNode ComputerMove(board);
-    ComputerMove = MiniMax(ComputerMove, false, true);
+    ComputerMove = MiniMax(ComputerMove, false);
     m_GameBoard.insert(ComputerMove.GetX()+1,ComputerMove.GetY()+1,!humanFirst);
     char x_o = !humanFirst?'X':'O';
     board[ComputerMove.GetY()][ComputerMove.GetX()] = x_o;
