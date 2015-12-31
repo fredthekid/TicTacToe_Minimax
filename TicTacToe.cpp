@@ -120,7 +120,6 @@ GameNode TicTacToe::MiniMax(GameNode& Node, bool humanOrComputer){ //humanOrComp
                 ComputerMove.SetX(x);
                 ComputerMove.SetY(y);
 
-                //THIS BOTTOM PART IS SHIT. Think of a way to do it with out a million if,elses later.
                 //HUMAN MOVE
                 if(humanOrComputer == true) ComputerMove.UpdateBoard(x,y, humanFirst);
                 //COMPUTER MOVE
